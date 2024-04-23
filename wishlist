@@ -1,0 +1,53 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Wishlist {
+    private List<String> items;
+
+    public Wishlist() {
+        this.items = new ArrayList<>();
+    }
+
+    public void addItem(String item) {
+        items.add(item);
+        System.out.println(item + " telah ditambahkan ke dalam wishlist.");
+    }
+
+    public void removeItem(String item) {
+        if (items.contains(item)) {
+            items.remove(item);
+            System.out.println(item + " telah dihapus dari wishlist.");
+        } else {
+            System.out.println("Item " + item + " tidak ada dalam wishlist.");
+        }
+    }
+
+    public void displayItems() {
+        if (items.isEmpty()) {
+            System.out.println("Wishlist kosong.");
+        } else {
+            System.out.println("Item dalam wishlist:");
+            for (String item : items) {
+                System.out.println("- " + item);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Wishlist wishlist = new Wishlist();
+
+        // Menambahkan item ke wishlist
+        wishlist.addItem("Laptop");
+        wishlist.addItem("Smartphone");
+        wishlist.addItem("Kamera");
+
+        // Menampilkan item dalam wishlist
+        wishlist.displayItems();
+
+        // Menghapus item dari wishlist
+        wishlist.removeItem("Smartphone");
+
+        // Menampilkan item dalam wishlist setelah dihapus
+        wishlist.displayItems();
+    }
+}
