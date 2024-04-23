@@ -1,53 +1,126 @@
-import java.util.ArrayList;
-import java.util.List;
+// Interface for Wishlist Management
+interface WishlistManagement {
+    void addProductToWishlist(Product product);
+    void removeProductFromWishlist(Product product);
+    void displayWishlist();
+}
 
-public class Wishlist {
-    private List<String> items;
+// Abstract class for Product
+abstract class Product {
+    String name;
+    double price;
 
-    public Wishlist() {
-        this.items = new ArrayList<>();
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
     }
 
-    public void addItem(String item) {
-        items.add(item);
-        System.out.println(item + " telah ditambahkan ke dalam wishlist.");
+    // Getters and Setters
+    // Assume they are implemented
+
+    abstract String getProductDetails();
+}
+
+// Concrete subclass of Product: Book
+class Book extends Product {
+    String author;
+
+    public Book(String name, double price, String author) {
+        super(name, price);
+        this.author = author;
     }
 
-    public void removeItem(String item) {
-        if (items.contains(item)) {
-            items.remove(item);
-            System.out.println(item + " telah dihapus dari wishlist.");
-        } else {
-            System.out.println("Item " + item + " tidak ada dalam wishlist.");
+    // Override getProductDetails method
+    @Override
+    String getProductDetails() {
+        return "Book: " + name + ", Author: " + author + ", Price: $" + price;
+    }
+}
+
+// Concrete subclass of Product: Clothing
+class Clothing extends Product {
+    String size;
+
+    public Clothing(String name, double price, String size) {
+        super(name, price);
+        this.size = size;
+    }
+
+    // Override getProductDetails method
+    @Override
+    String getProductDetails() {
+        return "Clothing: " + name + ", Size: " + size + ", Price: $" + price;
+    }
+}
+
+// Concrete subclass of Product: Electronics
+class Electronics extends Product {
+    String brand;
+
+    public Electronics(String name, double price, String brand) {
+        super(name, price);
+        this.brand = brand;
+    }
+
+    // Override getProductDetails method
+    @Override
+    String getProductDetails() {
+        return "Electronics: " + name + ", Brand: " + brand + ", Price: $" + price;
+    }
+}
+
+// Concrete implementation of Wishlist Management
+class UserWishlist implements WishlistManagement {
+    List<Product> wishlist;
+
+    public UserWishlist() {
+        this.wishlist = new ArrayList<>();
+    }
+
+    @Override
+    public void addProductToWishlist(Product product) {
+        wishlist.add(product);
+        System.out.println(product.name + " added to wishlist.");
+    }
+
+    @Override
+    public void removeProductFromWishlist(Product product) {
+        wishlist.remove(product);
+        System.out.println(product.name + " removed from wishlist.");
+    }
+
+    @Override
+    public void displayWishlist() {
+        System.out.println("Wishlist:");
+        for (Product product : wishlist) {
+            System.out.println(product.getProductDetails());
         }
     }
+}
 
-    public void displayItems() {
-        if (items.isEmpty()) {
-            System.out.println("Wishlist kosong.");
-        } else {
-            System.out.println("Item dalam wishlist:");
-            for (String item : items) {
-                System.out.println("- " + item);
-            }
-        }
-    }
-
+// Main class to test Wishlist Management
+public class Main {
     public static void main(String[] args) {
-        Wishlist wishlist = new Wishlist();
+        // Create instances of products
+        Book book = new Book("The Great Gatsby", 15.99, "F. Scott Fitzgerald");
+        Clothing clothing = new Clothing("T-shirt", 19.99, "M");
+        Electronics electronics = new Electronics("Smartphone", 599.99, "Samsung");
 
-        // Menambahkan item ke wishlist
-        wishlist.addItem("Laptop");
-        wishlist.addItem("Smartphone");
-        wishlist.addItem("Kamera");
+        // Create user wishlist
+        UserWishlist userWishlist = new UserWishlist();
 
-        // Menampilkan item dalam wishlist
-        wishlist.displayItems();
+        // Add products to wishlist
+        userWishlist.addProductToWishlist(book);
+        userWishlist.addProductToWishlist(clothing);
+        userWishlist.addProductToWishlist(electronics);
 
-        // Menghapus item dari wishlist
-        wishlist.removeItem("Smartphone");
+        // Display wishlist
+        userWishlist.displayWishlist();
 
-        // Menampilkan item dalam wishlist setelah dihapus
-        wishlist.displayItems();
+        // Remove a product from wishlist
+        userWishlist.removeProductFromWishlist(book);
+
+        // Display updated wishlist
+        userWishlist.displayWishlist();
     }
 }
