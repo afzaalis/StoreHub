@@ -7,6 +7,15 @@
  *
  * @author M GALANG PRADWITA
  */
-public class FilterbyNamaProduk {
-    
+public class FilterbyNamaProduk extends ProductFilter{
+    @Override
+    public List<Produk> filter(List<Produk> products, String keyword) {
+        List<Produk> filteredProducts = new ArrayList<>();
+        for (Produk product : products) {
+            if (product.getName().contains(keyword)) {
+                filteredProducts.add(product);
+            }
+        }
+        return filteredProducts;
+    }
 }
