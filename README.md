@@ -23,4 +23,4 @@ Welcome to **StoreHub**, the online store application that pampers users with ou
 - **Naufal Ajhar El Hafizh**
 - **M Galang Praditwa**
 
-Thank you for choosing **StoreHub** for your online shopping needs. If you have any questions or feedback, feel free to contact us. Happy shopping! 🛍️
+Thank you for choosing **StoreHub** for your online shopping needs.Happy shopping! 🛍️
